@@ -22,9 +22,12 @@ jobs:
        DOCKER_USER: ${{ secret.DOCKER_USER }}
        DOCKER_PASSWORD: ${{ secret.DOCKER_PASSWORD }}
       run: |
-       echo "Iniciando logueo"
        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-       echo "No se pudo"
-       
+    -  name: Build Dcoker image
+       run: |
+        docker build -t kr2011/docker-sitio:0.0.2 .
+    -  name: Push Docker Image 
+       run: |
+        docker push kr2011/docker-sitio:0.0.2
  #   - name: Build the Docker image
   #    run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
